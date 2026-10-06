@@ -17,3 +17,9 @@ jobs:
           python-version: "3.12"
       - run: pip install ccxt
       - run: python binance_btc_price.py
+      - name: Compare endpoints
+        run: |
+          for host in api.binance.com data-api.binance.vision; do
+            echo "== $host"
+            curl -s -w "\nHTTP %{http_code}\n" "https://$host/api/v3/ticker/price?symbol=BTCUSDT"
+          done
