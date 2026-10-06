@@ -1,0 +1,19 @@
+name: Binance BTC price
+
+on:
+  push:
+    branches: [claude/ccxt-binance-btc-price-mtqvud]
+    paths:
+      - binance_btc_price.py
+      - .github/workflows/binance-price.yml
+
+jobs:
+  price:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ccxt
+      - run: python binance_btc_price.py
